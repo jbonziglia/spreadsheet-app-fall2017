@@ -101,22 +101,51 @@ let mouseButtonPressed = (event, index) => {
  * @todo THEN USING THESE FUNCTIONS, REPLACE THE 0 IN EACH FUNCTION DEFINITION BELOW WITH THE APPROPRIATE OUTPUT
  * @todo BE SURE TO DOCUMENT EACH FUNCTION IN JSDOC FORMAT (USE BELOW AS REFERENCE AND SEE: http://usejsdoc.org/)
  */
-let converToLarger = x => Math.trunc(x/1000);
-console.log(convertToLarger(2300));
+let convertToLarger = (x, y) => Math.trunc(x/y);
+let msToTotalSeconds = x => convertToLarger(x,1000);
+let msToTotalMinutes = x => convertToLarger(msToTotalSeconds(x),60);
+let msToTotalHours = x => convertToLarger(msToTotalMinutes(x),60);
+let remainingAfterConvert = (x,y) => Math.trunc(x%y);
+let convertToSmaller = (x,y) => x*y;
+let daysToTotalHours = x => convertToSmaller(x,24);
+let daysToTotalMinutes = x => convertToSmaller(daysToTotalHours(x),60);
+let daysToTotalSeconds = x => convertToSmaller(daysToTotalMinutes(x),60);
 /**
  * Given a number of milliseconds from midnight, returns the second (0 to 60) for the displayed time
  * @param {number} num the number of milliseconds to convert to seconds
  * @return {number} second for the displayed time (0 to 60)
  */
-
-let getSecondFromMs   = num => 0;
-
-let getMinuteFromMs   = num => 0;
-let getHourFromMs     = num => 0;
-
-let getSecondFromDays = num => 0;
-let getMinuteFromDays = num => 0;
-let getHourFromDays   = num => 0;
+let getSecondFromMs   = num => remainingAfterConvert(msToTotalSeconds(num),60);
+/**
+ * Given a number of milliseconds from midnight, returns the minute (0 to 60) for the displayed time
+ * @param {number} num the number of milliseconds to convert to minutes
+ * @return {number} minute for the displayed time (0 to 60)
+ */
+let getMinuteFromMs   = num => remainingAfterConvert(msToTotalMinutes(num),60);
+/**
+ * Given a number of milliseconds from midnight, returns the hour (0 to 24) for the displayed time
+ * @param {number} num the number of milliseconds to convert to hours
+ * @return {number} hour for the displayed time (0 to 24)
+ */
+let getHourFromMs     = num => remainingAfterConvert(msToTotalHours(num),24);
+/**
+ * Given a number of days from midnight, returns the second (0 to 60) for the displayed time
+ * @param {number} num the number of days to convert to seconds
+ * @return {number} second for the displayed time (0 to 60)
+ */
+let getSecondFromDays = num => remainingAfterConvert(daysToTotalSeconds(num),60);
+/**
+ * Given a number of days from midnight, returns the minute (0 to 60) for the displayed time
+ * @param {number} num the number of days to convert to minutes
+ * @return {number} minute for the displayed time (0 to 60)
+ */
+let getMinuteFromDays = num => remainingAfterConvert(daysToTotalMinutes(num),60);
+/**
+ * Given a number of days from midnight, returns the hour (0 to 24) for the displayed time
+ * @param {number} num the number of days to convert to hours
+ * @return {number} hour for the displayed time (0 to 24)
+ */
+let getHourFromDays   = num => remainingAfterConvert(daysToTotalHours(num),24);
 
 /* END REPLACEMENT FOR ASSIGNMENT 2 */
 
